@@ -90,6 +90,10 @@
     mozzNemanjina.addPlayer(veljkoKockar);
 
     console.log(mozzNemanjina.getData());
+    console.log(mozzNemanjina.getData());
+
+
+
 
 
 
