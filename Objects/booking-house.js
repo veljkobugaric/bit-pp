@@ -10,67 +10,81 @@
         AUSTRALIA: 'AU'
     });
 
-    function Country(name, odds, continent) {
-        this.name = name;
-        this.odds = odds;
-        this.continent = continent;
+    class Country {
+        constructor(name, odds, continent) {
+            this.name = name;
+            this.odds = odds;
+            this.continent = continent;
+        }
     }
 
-    function Person(name, surname, dateOfBirth) {
-        this.name = name;
-        this.surname = surname;
-        this.dateOfBirth = new Date(dateOfBirth);
-    }
-    Person.prototype.getFullName = function () {
-        return `${this.name}, ${this.surname}`;
-    }
-    Person.prototype.getData = function () {
-        return `${this.getFullName()}, ${this.dateOfBirth.getDate()}.${(this.dateOfBirth.getMonth() + 1)}.${this.dateOfBirth.getFullYear()}`;
-    }
-
-    function Player(person, betAmount, country) {
-        this.person = person;
-        this.betAmount = betAmount;
-        this.country = country;
-    }
-    Player.prototype.getPlayerData = function () {
-        let currentTime = new Date();
-        let personAge = currentTime.getFullYear() - this.person.dateOfBirth.getFullYear();
-        return `${this.country.continent}, ${this.betAmount}eur , ${this.person.getFullName()}, ${personAge}years`;
+    class Person {
+        constructor(name, surname, dateOfBirth) {
+            this.name = name;
+            this.surname = surname;
+            this.dateOfBirth = new Date(dateOfBirth);
+        }
+        getFullName() {
+            return `${this.name}, ${this.surname}`;
+        }
+        getData() {
+            return `${this.getFullName()}, ${this.dateOfBirth.getDate()}.${(this.dateOfBirth.getMonth() + 1)}.${this.dateOfBirth.getFullYear()}`;
+        }
     }
 
-    function Address(country, city, postalCode, streetAndNumber) {
-        this.country = country;
-        this.city = city;
-        this.postalCode = postalCode;
-        this.streetAndNumber = streetAndNumber;
-    }
-    Address.prototype.getData = function () {
-        `${this.streetAndNumber}, ${this.postalCode} ${this.city}, ${this.country.continent} `
-        return `${this.streetAndNumber},  ${this.postalCode},  ${this.city},  ${this.country.continent}`;
+    class Player {
+        constructor(person, betAmount, country) {
+            this.person = person;
+            this.betAmount = betAmount;
+            this.country = country;
+        }
+        getPlayerData() {
+            let currentTime = new Date();
+            let personAge = currentTime.getFullYear() - this.person.dateOfBirth.getFullYear();
+            return `${this.country.continent}, ${this.betAmount}eur , ${this.person.getFullName()}, ${personAge}years`;
+        }
+
     }
 
-    function BettingPlace(address) {
-        this.address = address;
-        this.listOfPLayers = [];
-    }
-    BettingPlace.prototype.addPlayer = function (player) {
-        this.listOfPLayers.push(player);
-    }
-    BettingPlace.prototype.getData = function () {
-        let playersString = '';
-
-        this.listOfPLayers.forEach(function (player) {
-            playersString += player.getPlayerData() + '\n';
-        })
-
-        return playersString;
+    class Address {
+        constructor(country, city, postalCode, streetAndNumber) {
+            this.country = country;
+            this.city = city;
+            this.postalCode = postalCode;
+            this.streetAndNumber = streetAndNumber;
+        }
+        getData() {
+            return `${this.streetAndNumber},  ${this.postalCode},  ${this.city},  ${this.country.continent}`;
+        }
     }
 
-    function BettingHouse(competition, numberOfPLayers) {
-        this.competition = competition;
-        this.listOfBettingPlaces = [];
-        this.numberOfPLayers = numberOfPLayers;
+
+    class BettingPlace {
+        constructor(address) {
+            this.address = address;
+            this.listOfPLayers = [];
+        }
+        addPlayer(player) {
+            this.listOfPLayers.push(player);
+        }
+        getData() {
+            let playersString = '';
+
+            this.listOfPLayers.forEach(function (player) {
+                playersString += player.getPlayerData() + '\n';
+            })
+
+            return playersString;
+        }
+    }
+
+
+    class BettingHouse {
+        constructor(competition, numberOfPLayers) {
+            this.competition = competition;
+            this.listOfBettingPlaces = [];
+            this.numberOfPLayers = numberOfPLayers;
+        }
     }
 
 
